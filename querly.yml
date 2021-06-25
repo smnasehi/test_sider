@@ -1,0 +1,9 @@
+rules:
+  - id: new_routes
+    pattern: resources
+    message: No new routes in routes.rb. Please create a new routes file and use draw.
+
+check:
+  - path: config/routes/
+    rules:
+      - except: new_routes
