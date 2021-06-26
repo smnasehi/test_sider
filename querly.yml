@@ -3,6 +3,15 @@ rules:
     pattern: resources
     message: No new routes in routes.rb. Please create a new routes file and use draw.
 
+  - id: long_running_queries
+    pattern: add_column(:credit_cards, ...)
+    message: Avoid adding a column that could lock the table. Also consider adding this column in advance.
+    before:
+      - add_column :credit_cards, :expired, :boolean
+    after:
+      - ActiveRecord::Base.connection.execute('ALTER TABLE credit_cards ADD COLUMN expired BOOLEAN, ALGORITHM=INPLACE, LOCK=NONE;') unless column_exists? :credit_cards, :expired
+
+
 check:
   - path: config/routes/
     rules:
