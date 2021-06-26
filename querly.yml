@@ -7,9 +7,9 @@ rules:
     pattern: add_column(:credit_cards, ...)
     message: Avoid adding a column that could lock the table. Also consider adding this column in advance.
     before:
-      - add_column :credit_cards, :expired, :boolean
+      - "add_column :credit_cards, :expired, :boolean"
     after:
-      - ActiveRecord::Base.connection.execute('ALTER TABLE credit_cards ADD COLUMN expired BOOLEAN, ALGORITHM=INPLACE, LOCK=NONE;') unless column_exists? :credit_cards, :expired
+      - "ActiveRecord::Base.connection.execute('ALTER TABLE credit_cards ADD COLUMN expired BOOLEAN, ALGORITHM=INPLACE, LOCK=NONE;') unless column_exists? :credit_cards, :expired"
 
 
 check:
