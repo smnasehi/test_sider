@@ -1,6 +1,6 @@
 class CreditCard < ApplicationRecord
 
-  def x
-    y=10
+  def bad_method(name, number, expiry_date, some_other_stuff)
+    y = 10
   end
 end
