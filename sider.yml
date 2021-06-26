@@ -1,0 +1,10 @@
+linter:
+  rubocop:
+    config: config/.rubocop.yml
+    safe: true
+  reek:
+    target:
+      - app/
+      - lib/
+      - test/
+    config: config/.reek.yml
